@@ -1,0 +1,40 @@
+# Version control
+.git
+.gitignore
+.github/
+
+# Python cache files
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.pytest_cache/
+
+# Virtual environments
+venv/
+env/
+ENV/
+.env
+
+# IDE specific files
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS specific files
+.DS_Store
+Thumbs.db
+
+# Build and distribution
+*.egg-info/
+dist/
+build/
+
+# Log files
+*.log
+
+# Local development files
+docker-compose.yml
+docker-compose.*.yml
