@@ -2,6 +2,7 @@ from enum import Enum
 from typing import OrderedDict
 
 from pydantic import BaseModel
+from fastapi import HTTPException, status
 
 
 class Genre(str, Enum):
@@ -60,7 +61,13 @@ class InMemoryDB:
 
         Returns:
             Book: Book.
+        
+        Raises:
+            HTTPException: When book is not found.
         """
+        book = self.books.get(book_id)
+        if book is None:
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"Book not found")
         return self.books.get(book_id)
 
     def update_book(self, book_id: int, data: Book) -> Book:
