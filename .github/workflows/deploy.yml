@@ -23,7 +23,7 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.13'
-      
+
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
@@ -32,10 +32,11 @@ jobs:
       - name: Run tests
         run: |
           pytest
-          
+
   deploy:
-    needs: test  
-    runs-on: ubuntu-latest  
+    needs: test
+    runs-on: ubuntu-latest
+    environment: hng-fast-api
     # if: github.ref == 'refs/heads/main'
     steps:
       - name: Get code
@@ -48,5 +49,9 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-      - name: Deploy to your environment (example)
-        run: echo "Deployment complete."
+      - name: Deploy to Heroku
+        uses: akhileshns/heroku-deploy@v3.13.15
+        with:
+          heroku_api_key: ${{ secrets.HEROKU_API_KEY}}
+          heroku_app_name: ${{secrets.HEROKU_APP_NAME}}
+          heroku_email: ${{secrets.HEROKU_EMAIL}}
